@@ -1,5 +1,3 @@
-# Plik: tests/test_bloodwork_calculator.py
-
 import pytest
 from mediscan.bloodwork_calculator import (
     calculate_bmi,
@@ -7,8 +5,6 @@ from mediscan.bloodwork_calculator import (
     categorize_bmi,
     calculate_anemia_severity
 )
-
-# Kontynuacja pliku test_bloodwork_calculator.py
 
 def test_calculate_bmi_normal_case():
     """Test BMI dla typowych wartości."""
@@ -44,7 +40,6 @@ def test_calculate_bmi_zero_height():
     with pytest.raises(ZeroDivisionError):
         calculate_bmi(70, 0)  # Powinno zgłosić błąd dzielenia przez zero
 		
-# Kontynuacja pliku test_bloodwork_calculator.py
 
 def test_calculate_nlr_normal_case():
     """Test NLR dla typowych wartości."""
@@ -74,8 +69,6 @@ def test_calculate_nlr_zero_lymphocytes():
     with pytest.raises(ZeroDivisionError):
         calculate_nlr(5.0, 0)  # Powinno zgłosić błąd dzielenia przez zero
 		
-# Kontynuacja pliku test_bloodwork_calculator.py
-
 @pytest.fixture
 def sample_patients():
     """Fixture dostarczająca przykładowe dane pacjentów."""
@@ -85,7 +78,6 @@ def sample_patients():
         {"id": 3, "weight": 90, "height": 180, "sex": "M", "hemoglobin": 10.5, "neutrophils": 6.5, "lymphocytes": 1.5},
         {"id": 4, "weight": 60, "height": 165, "sex": "F", "hemoglobin": 9.5, "neutrophils": 5.0, "lymphocytes": 1.8}
     ]
-# Kontynuacja pliku test_bloodwork_calculator.py
 
 @pytest.mark.parametrize("bmi, expected_category", [
     (16, "wygłodzenie"),
@@ -119,8 +111,6 @@ def test_categorize_bmi_boundary(bmi, expected_category):
     assert result == expected_category, \
         f"Dla granicznego BMI {bmi} kategoria powinna być '{expected_category}', ale otrzymano '{result}'"
 
-# Kontynuacja pliku test_bloodwork_calculator.py
-
 @pytest.mark.parametrize("hemoglobin, sex, expected_severity", [
     (14.0, "M", "brak"),        # mężczyzna, normalna hemoglobina
     (12.0, "M", "łagodna"),     # mężczyzna, łagodna niedokrwistość
@@ -145,8 +135,6 @@ def test_calculate_anemia_severity_invalid_sex():
     # Ta funkcja powinna obsługiwać tylko 'M' i 'F'
     with pytest.raises(Exception):  # Ogólna klasa Exception, bo nie wiemy dokładnie jaki wyjątek będzie zgłoszony
         calculate_anemia_severity(12.0, "X")
-
-# Kontynuacja pliku test_bloodwork_calculator.py
 
 def test_patient_bmi_calculation(sample_patients):
     """Test obliczania BMI dla przykładowych pacjentów."""
