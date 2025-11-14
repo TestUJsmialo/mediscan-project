@@ -17,12 +17,23 @@ def test_categorize_bmi():
         result = categorize_bmi(bmi)
         assert result == expected_result[i], \
             f"Dla BMI {bmi} oczekiwano kategorii '{expected_result[i]}', otrzymano '{result}'"
+
 def test_calculate_BMI():
     test_cases = [
         (70, 175, 22.86),
         (50, 160, 19.53),
         (90, 180, 27.78),
         (110, 165, 40.40)
+    ]
+    for weight, height, expected_bmi in test_cases:
+        calculated_bmi = round(calculate_bmi(weight, height), 2)
+        assert calculated_bmi == expected_bmi, \
+            f"Dla wagi {weight} kg i wzrostu {height} m oczekiwano BMI {expected_bmi}, otrzymano {calculated_bmi}"
+
+def test_calculate_BMI_bad_type():
+    test_cases = [
+        ("siedemdziesiąt", 175, "błąd - nieprawidłowy typ wagi"), # fail - brak obsługi nieprawidlowego typu wartości w kodzie
+        (70, "sto siedemdziesiąt pięć", "błąd - nieprawidłowy typ wzrostu") # fail - brak obsługi nieprawidlowego typu wartości w kodzie
     ]
     for weight, height, expected_bmi in test_cases:
         calculated_bmi = round(calculate_bmi(weight, height), 2)
@@ -42,6 +53,7 @@ def test_calculate_BMI_negative_values():
         calculated_bmi = round(calculate_bmi(weight, height), 2)
         assert calculated_bmi == expected_bmi, \
             f"Dla wagi {weight} kg i wzrostu {height} m oczekiwano BMI {expected_bmi}, otrzymano {calculated_bmi}"
+
 def test_calculate_nlr():
     test_cases = [
         (4.0, 2.0, 2.0),
