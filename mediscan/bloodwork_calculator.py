@@ -74,7 +74,7 @@ def calculate_anemia_severity(hemoglobin, sex):
         else:
             return "ciężka"
     elif sex == 'F':
-        if hemoglobin >= 10.0:  # BŁĄD: powinno być 12.0
+        if hemoglobin >= 10.0:
             return "brak"
         elif hemoglobin >= 10.0:
             return "łagodna"
