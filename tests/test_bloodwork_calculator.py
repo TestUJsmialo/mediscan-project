@@ -18,6 +18,18 @@ def test_categorize_bmi():
         assert result == expected_result[i], \
             f"Dla BMI {bmi} oczekiwano kategorii '{expected_result[i]}', otrzymano '{result}'"
 
+def test_categorize_bmi_crazy_values():
+    bmi_values = [0.0, -5.0, 100.0]
+    expected_result = [
+        "błąd - nieprawidłowa wartość BMI", # fail - brak obsługi nieprawidlowego BMI w kodzie
+        "błąd - nieprawidłowa wartość BMI", # fail - brak obsługi nieprawidlowego BMI w kodzie
+        "otyłość III stopnia"
+    ]
+    for i, bmi in enumerate(bmi_values):
+        result = categorize_bmi(bmi)
+        assert result == expected_result[i], \
+            f"Dla BMI {bmi} oczekiwano kategorii '{expected_result[i]}', otrzymano '{result}'"
+        
 def test_calculate_BMI():
     test_cases = [
         (70, 175, 22.86),
