@@ -31,12 +31,12 @@ def test_calculate_BMI():
 
 def test_calculate_BMI_negative_values():
     test_cases = [
-        (70, -175, "błąd - ujemny wzrost"),
-        (-50, 160, "błąd - ujemna waga"),
-        (0, 180, "błąd - zerowa waga"),
-        (110, 0, "błąd - zerowy wzrost")
-        ("pięćdziesiąt", 165, "błąd - nieprawidłowy typ wagi"),
-        (90, "sto osiemdziesiąt centymetrów", "błąd - nieprawidłowy typ wzrostu")
+        (70, -175, "błąd - ujemny wzrost"), # fail - brak obsługi ujemnych wartości w kodzie
+        (-50, 160, "błąd - ujemna waga"), # fail - brak obsługi ujemnych wartości w kodzie
+        (0, 180, "błąd - zerowa waga"), # fail - brak obsługi zerowych wartości w kodzie
+        (110, 0, "błąd - zerowy wzrost") # fail - brak obsługi zerowych wartości w kodzie
+        ("pięćdziesiąt", 165, "błąd - nieprawidłowy typ wagi"), # fail - brak obsługi nieprawidlowego typu wartości w kodzie
+        (90, "sto osiemdziesiąt centymetrów", "błąd - nieprawidłowy typ wzrostu") # fail - brak obsługi nieprawidlowego typu wartości w kodzie
     ]
     for weight, height, expected_bmi in test_cases:
         calculated_bmi = round(calculate_bmi(weight, height), 2)
@@ -56,7 +56,7 @@ def test_calculate_nlr():
         
 def test_calculate_anemia_severity():
     test_cases = [
-        ("F", 13.0,  "brak"),
+        ("F", 13.0,  "brak"), # fail - źle podana wartość w kodzie
         ("F", 11.0,  "łagodna"),
         ("F", 8.50,  "umiarkowana"),
         ("F", 7.50, "ciężka"),
@@ -72,7 +72,7 @@ def test_calculate_anemia_severity():
         
 def test_calculate_anemia_severity_edge_cases():
     test_cases = [
-        ("N", 12.0,  "nieznana_płeć"),
+        ("N", 12.0,  "nieznana_płeć"), # fail - brak obsługi nieprawidlowego typu płci w kodzie
     ]
     for sex, hemoglobin, expected_as in test_cases:
         calculated_as = calculate_anemia_severity(hemoglobin, sex)
